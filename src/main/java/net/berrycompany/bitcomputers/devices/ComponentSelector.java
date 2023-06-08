@@ -109,7 +109,6 @@ public class ComponentSelector extends Device {
 				components[select] = wrapper.getDeclaredConstructor(Environment.class).newInstance(host);
 				return true;
 			} catch (Exception e) {
-				e.printStackTrace();
 				return false;
 			}
 		}
@@ -215,7 +214,7 @@ public class ComponentSelector extends Device {
 			case 3: // list
 				status = 0;
 				tsfdata = null;
-				if (inputbuf.size() > 0) {
+				if (!inputbuf.isEmpty()) {
 					Object[] tsfdataz = TSFHelper.readArray(inputbuf, machine, false);
 					if (tsfdataz == null || tsfdataz.length != 1 || !(tsfdataz[0] instanceof String || tsfdataz[0] instanceof UUID || tsfdataz[0] instanceof Number)) {
 						status = 1;

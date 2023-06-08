@@ -1,24 +1,25 @@
-package net.berrycompany.bitcomputers;
+package net.berrycompany.bitcomputers.architectures.csg;
 
-import com.loomcom.symon.Cpu;
+import com.loomcom.symon.cpus.CPU65CE02;
 
 import li.cil.oc.api.machine.Context;
+import net.berrycompany.bitcomputers.architectures.csg.BitComputersMachine65CE02;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-public class BitComputersVM {
+public class BitComputersVM65CE02 {
 	// The simulated machine
-	public BitComputersMachine machine;
+	public BitComputersMachine65CE02 machine;
 
 	// Allocated cycles per tick
 	public int cyclesPerTick;
 
-	public BitComputersVM(Context context) {
+	public BitComputersVM65CE02(Context context) {
 		super();
 		MinecraftForge.EVENT_BUS.register(this);
 		try {
-			machine = new BitComputersMachine(context);
+			machine = new BitComputersMachine65CE02(context);
 			if (context.node().network() == null) {
 				// Loading from NBT
 				return;
@@ -31,7 +32,7 @@ public class BitComputersVM {
 
 	void run() throws Exception {
 		machine.getComponentSelector().checkDelay();
-		Cpu mCPU = machine.getCpu();
+		CPU65CE02 mCPU = machine.getCpu();
 		while (mCPU.getCycles() > 0) {
 			mCPU.step();
 		}
@@ -48,7 +49,7 @@ public class BitComputersVM {
 		if (event.phase != TickEvent.Phase.START) {
 			return;
 		}
-		Cpu mCPU = machine.getCpu();
+		CPU65CE02 mCPU = machine.getCpu();
 		if (mCPU.getCycles() < cyclesPerTick) {
 			mCPU.addCycles(cyclesPerTick);
 		}

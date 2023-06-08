@@ -6,12 +6,12 @@ import java.util.Map;
 import java.util.Queue;
 
 import net.berrycompany.bitcomputers.BitComputers;
+import net.berrycompany.bitcomputers.BitComputersArchitecture;
 import net.berrycompany.bitcomputers.BitComputersConfig;
 import net.berrycompany.bitcomputers.util.TSFHelper;
 import net.berrycompany.bitcomputers.util.UUIDHelper;
 import org.apache.commons.lang3.ArrayUtils;
 
-import net.berrycompany.bitcomputers.BitComputersArchitecture;
 import net.berrycompany.bitcomputers.api.BitComputersWrapper;
 import net.berrycompany.bitcomputers.exceptions.CallSynchronizedException;
 import net.berrycompany.bitcomputers.exceptions.CallSynchronizedException.Cleanup;

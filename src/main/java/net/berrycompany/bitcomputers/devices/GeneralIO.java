@@ -1,24 +1,23 @@
 package net.berrycompany.bitcomputers.devices;
 
+import com.google.common.base.Charsets;
+import com.google.common.collect.EvictingQueue;
+import com.loomcom.symon.Bus;
+import com.loomcom.symon.CPU;
+import com.loomcom.symon.devices.Device;
+import li.cil.oc.api.machine.Context;
+import li.cil.oc.api.machine.Machine;
+import li.cil.oc.api.machine.Signal;
+import net.berrycompany.bitcomputers.util.ConsoleDriver;
+import net.berrycompany.bitcomputers.util.TSFHelper;
+import net.minecraft.nbt.NBTTagCompound;
+import org.apache.commons.lang3.ArrayUtils;
+import org.lwjgl.input.Keyboard;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.ArrayUtils;
-import org.lwjgl.input.Keyboard;
-
-import com.google.common.base.Charsets;
-import com.google.common.collect.EvictingQueue;
-import com.loomcom.symon.Bus;
-import com.loomcom.symon.Cpu;
-import com.loomcom.symon.devices.Device;
-import net.berrycompany.bitcomputers.util.ConsoleDriver;
-import net.berrycompany.bitcomputers.util.TSFHelper;
-import li.cil.oc.api.machine.Context;
-import li.cil.oc.api.machine.Machine;
-import li.cil.oc.api.machine.Signal;
-import net.minecraft.nbt.NBTTagCompound;
 
 @SuppressWarnings("UnstableApiUsage")
 public class GeneralIO extends Device {
@@ -223,7 +222,7 @@ public class GeneralIO extends Device {
 	public void onSignal(Signal signal) {
 		String name = signal.name();
 		Object[] args = signal.args();
-		Cpu cpu = this.getBus().getMachine().getCpu();
+		CPU cpu = this.getBus().getMachine().getCpu();
 		if (name.equals("key_down")) {
 			int character = (int) args[1];
 			int lwjglcode = (int) args[2];

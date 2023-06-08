@@ -165,7 +165,7 @@ public class Bus {
 		this.machine = machine;
 	}
 
-	public void setCpu(Cpu cpu) {
+	public void setCpu(CPU cpu) {
 		cpu.setBus(this);
 	}
 

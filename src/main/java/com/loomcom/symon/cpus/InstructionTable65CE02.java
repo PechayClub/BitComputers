@@ -21,9 +21,9 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.loomcom.symon;
+package com.loomcom.symon.cpus;
 
-public interface InstructionTable {
+public interface InstructionTable65CE02 {
 
 	/**
 	 * Enumeration of Addressing Modes.

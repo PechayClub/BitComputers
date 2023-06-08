@@ -3,6 +3,8 @@ package net.berrycompany.bitcomputers;
 import java.io.IOException;
 import java.io.InputStream;
 
+import net.berrycompany.bitcomputers.architectures.wdc.BitComputersArchitecture65C02;
+import net.berrycompany.bitcomputers.architectures.csg.BitComputersArchitecture65CE02;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -33,7 +35,8 @@ public class BitComputers {
 		config = new Configuration(event.getSuggestedConfigurationFile());
 
 		BitComputersConfig.loadConfig(config);
-		Machine.add(BitComputersArchitecture.class);
+		Machine.add(BitComputersArchitecture65CE02.class);
+		Machine.add(BitComputersArchitecture65C02.class);
 	}
 
 	@Mod.EventHandler

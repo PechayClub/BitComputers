@@ -21,14 +21,15 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.loomcom.symon;
+package com.loomcom.symon.cpus;
 
+import com.loomcom.symon.CPUState;
 import com.loomcom.symon.util.Utils;
 
 /**
  * A compact, struct-like representation of CPU state.
  */
-public class CpuState {
+public class CPU65CE02State extends CPUState {
 	/**
 	 * Accumulator
 	 */
@@ -101,7 +102,7 @@ public class CpuState {
 	 * @return a string formatted for the trace log.
 	 */
 	public String toTraceEvent() {
-		String opcode = Cpu.disassembleOp(ir, args);
+		String opcode = CPU65CE02.disassembleOp(ir, args);
 		return getInstructionByteStatus() + "  " + String.format("%-14s", opcode) + "A:" + Utils.byteToHex(a) + " " + "B:" + Utils.byteToHex(b) + " "  + "X:" + Utils.byteToHex(x) + " " + "Y:" + Utils.byteToHex(y) + "Z:" + " " + Utils.byteToHex(z) + " " + "F:" + Utils.byteToHex(getStatusFlag()) + " " + "S:1" + Utils.byteToHex(sp) + " " + getProcessorStatusString();
 	}
 
@@ -111,34 +112,34 @@ public class CpuState {
 	public int getStatusFlag() {
 		int status = 0x00;
 		if (carryFlag) {
-			status |= Cpu.P_CARRY;
+			status |= CPU65CE02.P_CARRY;
 		}
 		if (zeroFlag) {
-			status |= Cpu.P_ZERO;
+			status |= CPU65CE02.P_ZERO;
 		}
 		if (irqDisableFlag) {
-			status |= Cpu.P_IRQ_DISABLE;
+			status |= CPU65CE02.P_IRQ_DISABLE;
 		}
 		if (decimalModeFlag) {
-			status |= Cpu.P_DECIMAL;
+			status |= CPU65CE02.P_DECIMAL;
 		}
 		if (breakFlag) {
-			status |= Cpu.P_BREAK;
+			status |= CPU65CE02.P_BREAK;
 		}
 		if (extendFlag) {
-			status |= Cpu.P_EXTEND;
+			status |= CPU65CE02.P_EXTEND;
 		}
 		if (overflowFlag) {
-			status |= Cpu.P_OVERFLOW;
+			status |= CPU65CE02.P_OVERFLOW;
 		}
 		if (negativeFlag) {
-			status |= Cpu.P_NEGATIVE;
+			status |= CPU65CE02.P_NEGATIVE;
 		}
 		return status;
 	}
 
 	public String getInstructionByteStatus() {
-		switch (InstructionTable.instructionModes[ir].getLength()) {
+		switch (InstructionTable65CE02.instructionModes[ir].getLength()) {
 		case 0:
 		case 1:
 			return Utils.wordToHex(lastPc) + "  " + Utils.byteToHex(ir) + "      ";

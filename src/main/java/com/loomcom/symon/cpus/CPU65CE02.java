@@ -21,8 +21,11 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.loomcom.symon;
+package com.loomcom.symon.cpus;
 
+import com.loomcom.symon.Bus;
+import com.loomcom.symon.CPU;
+import com.loomcom.symon.CPUState;
 import com.loomcom.symon.util.Utils;
 
 import net.berrycompany.bitcomputers.BitComputers;
@@ -34,7 +37,7 @@ import net.berrycompany.bitcomputers.BitComputersConfig;
  * and exposes some of the internal state for inspection and debugging.
  */
 @SuppressWarnings("unused")
-public class Cpu implements InstructionTable {
+public class CPU65CE02 extends CPU implements InstructionTable65CE02 {
 
 	/* Process status register mnemonics */
 	public static final int P_CARRY = 0x01;
@@ -56,14 +59,8 @@ public class Cpu implements InstructionTable {
 	public static final int IRQ_VECTOR_L = 0xfffe;
 	public static final int IRQ_VECTOR_H = 0xffff;
 
-	/* The Bus */
-	private Bus bus;
-
 	/* The CPU state */
-	private final CpuState state = new CpuState();
-
-	/* CPU Cycles available */
-	private int cycles = 0;
+	private final CPU65CE02State state = new CPU65CE02State();
 
 	/**
 	 * Set the bus reference for this CPU.
@@ -165,12 +162,12 @@ public class Cpu implements InstructionTable {
 		int irAddressMode = (state.ir >> 2) & 0x07; // Bits 3-5 of IR:  [ | | |X|X|X| | ]
 		int irOpMode = state.ir & 0x03; // Bits 6-7 of IR:  [ | | | | | |X|X]
 
-		cycles -= Cpu.instructionClocks[state.ir];
+		cycles -= CPU65CE02.instructionClocks[state.ir];
 
 		incrementPC();
 
 		// Decode the instruction and operands
-		state.instSize = Cpu.instructionModes[state.ir].getLength();
+		state.instSize = CPU65CE02.instructionModes[state.ir].getLength();
 		for (int i = 0; i < state.instSize - 1; i++) {
 			state.args[i] = bus.read(state.pc);
 			// Increment PC after reading
@@ -184,7 +181,7 @@ public class Cpu implements InstructionTable {
 		int lo;
 		int hi;
 
-		switch (Cpu.instructionModes[state.ir]) {
+		switch (CPU65CE02.instructionModes[state.ir]) {
 		case ACC: // Accumulator
 		case IMM: // #Immediate
 		case IMW: // #Immediate (word)
@@ -1164,7 +1161,7 @@ public class Cpu implements InstructionTable {
 	 *
 	 * @return the current Cpu State.
 	 */
-	public CpuState getCpuState() {
+	public CPUState getCpuState() {
 		return state;
 	}
 
@@ -1710,7 +1707,7 @@ public class Cpu implements InstructionTable {
 	public String disassembleOpAtAddress(int address) {
 		int opCode = bus.read(address);
 		int[] args = new int[2];
-		int size = Cpu.instructionModes[opCode].getLength();
+		int size = CPU65CE02.instructionModes[opCode].getLength();
 		for (int i = 1; i < size; i++) {
 			args[i - 1] = bus.read(address + i);
 		}

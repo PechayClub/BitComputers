@@ -5,7 +5,8 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 import com.loomcom.symon.Bus;
-import com.loomcom.symon.Cpu;
+import com.loomcom.symon.CPU;
+import com.loomcom.symon.cpus.CPU65CE02;
 import com.loomcom.symon.devices.Device;
 import li.cil.oc.api.machine.Machine;
 import net.minecraft.nbt.NBTTagCompound;
@@ -52,7 +53,7 @@ public class RTC extends Device {
 	}
 
 	public void onServerTick() {
-		Cpu cpu = this.getBus().getMachine().getCpu();
+		CPU cpu = this.getBus().getMachine().getCpu();
 		if (timerA > 0) {
 			if (--timerA <= 0) {
 				if ((nmimask & 1) != 0)

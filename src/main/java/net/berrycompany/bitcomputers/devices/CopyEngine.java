@@ -1,7 +1,7 @@
 package net.berrycompany.bitcomputers.devices;
 
 import com.loomcom.symon.Bus;
-import com.loomcom.symon.Cpu;
+import com.loomcom.symon.CPU;
 import com.loomcom.symon.devices.Device;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -62,7 +62,7 @@ public class CopyEngine extends Device {
 			boolean sUnpack = (data & 0x02) != 0;
 			boolean tUnpack = (data & 0x01) != 0;
 			Bus bus = this.getBus();
-			Cpu cpu = bus.getMachine().getCpu();
+			CPU cpu = bus.getMachine().getCpu();
 			if ((data & 0x04) != 0) { // backwards
 				for (int i = dmaLength-1; i >= 0; i--) {
 					int si = sUnpack ? i : 0;
