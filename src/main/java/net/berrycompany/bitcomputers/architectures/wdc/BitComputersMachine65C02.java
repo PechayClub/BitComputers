@@ -25,10 +25,11 @@
 package net.berrycompany.bitcomputers.architectures.wdc;
 
 import com.loomcom.symon.Bus;
-import com.loomcom.symon.cpus.CPU65C02;
+import com.loomcom.symon.cpus.wdc.CPU65C02;
 import li.cil.oc.api.machine.Context;
 import net.berrycompany.bitcomputers.BitComputersMachine;
 import net.berrycompany.bitcomputers.devices.*;
+import net.berrycompany.bitcomputers.devices.GeneralIO;
 
 import java.util.ArrayList;
 

@@ -1,9 +1,8 @@
 package net.berrycompany.bitcomputers.architectures.csg;
 
-import com.loomcom.symon.cpus.CPU65CE02;
+import com.loomcom.symon.cpus.csg.CPU65CE02;
 
 import li.cil.oc.api.machine.Context;
-import net.berrycompany.bitcomputers.architectures.csg.BitComputersMachine65CE02;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;

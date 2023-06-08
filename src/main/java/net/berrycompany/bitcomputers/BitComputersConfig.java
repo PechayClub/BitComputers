@@ -4,7 +4,7 @@ import net.minecraftforge.common.config.Configuration;
 
 public class BitComputersConfig {
 
-	public static int clocksPerTick = 15000;
+	public static int clocksPerTick = 280000000;
 
 	// Debugging
 	public static boolean debugCpuSlowDown = false;

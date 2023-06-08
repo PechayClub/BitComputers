@@ -1,6 +1,7 @@
 package net.berrycompany.bitcomputers.architectures.wdc;
 
 import com.loomcom.symon.cpus.wdc.CPU65C02;
+import com.loomcom.symon.cpus.wdc.CPU65C02S;
 import com.loomcom.symon.cpus.wdc.CPU65C02State;
 import li.cil.oc.Settings;
 import li.cil.oc.api.Driver;
@@ -31,11 +32,11 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 @SuppressWarnings("unused")
-@Architecture.Name("WDC 65C02")
-public class BitComputersArchitecture65C02 extends BitComputersArchitecture {
+@Architecture.Name("WDC 65C02S")
+public class BitComputersArchitecture65C02S extends BitComputersArchitecture {
 	private final Machine machine;
 
-	private BitComputersVM65C02 vm;
+	private BitComputersVM65C02S vm;
 
 	private boolean initialized = false;
 
@@ -44,7 +45,7 @@ public class BitComputersArchitecture65C02 extends BitComputersArchitecture {
 	private CallSynchronizedException syncCall;
 
 	/** The constructor must have exactly this signature. */
-	public BitComputersArchitecture65C02(Machine machine) {
+	public BitComputersArchitecture65C02S(Machine machine) {
 		this.machine = machine;
 	}
 
@@ -77,7 +78,7 @@ public class BitComputersArchitecture65C02 extends BitComputersArchitecture {
 	@Override
 	public boolean initialize() {
 		// Set up new VM here
-		vm = new BitComputersVM65C02(machine);
+		vm = new BitComputersVM65C02S(machine);
 		BankSelector banksel = this.vm.machine.getBankSelector();
 		int memory = calculateMemory(this.machine.host().internalComponents());
 		vm.machine.resize(memory);
@@ -157,7 +158,7 @@ public class BitComputersArchitecture65C02 extends BitComputersArchitecture {
 		} else {
 			// Attempt to invoke again by re-executing the last instruction
 			inSynchronizedCall = true;
-			CPU65C02 cpu = vm.machine.getCpu();
+			CPU65C02S cpu = vm.machine.getCpu();
 			((CPU65C02State) cpu.getCpuState()).pc = ((CPU65C02State) cpu.getCpuState()).lastPc;
 			cpu.step();
 			inSynchronizedCall = false;
@@ -226,7 +227,7 @@ public class BitComputersArchitecture65C02 extends BitComputersArchitecture {
 
 		// Restore CPU
 		if (nbt.hasKey("cpu")) {
-			CPU65C02 mCPU = vm.machine.getCpu();
+			CPU65C02S mCPU = vm.machine.getCpu();
 			CPU65C02State cpuState = (CPU65C02State) mCPU.getCpuState();
 			NBTTagCompound cpuTag = nbt.getCompoundTag("cpu");
 			cpuState.a = cpuTag.getInteger("rA");
@@ -267,7 +268,7 @@ public class BitComputersArchitecture65C02 extends BitComputersArchitecture {
 		}
 
 		// Persist CPU
-		CPU65C02 mCPU = vm.machine.getCpu();
+		CPU65C02S mCPU = vm.machine.getCpu();
 		if (mCPU != null) {
 			NBTTagCompound cpuTag = getNbtTagCompound(mCPU);
 			nbt.setTag("cpu", cpuTag);
@@ -281,7 +282,7 @@ public class BitComputersArchitecture65C02 extends BitComputersArchitecture {
 		vm.machine.getBus().save(nbt);
 	}
 
-	private static NBTTagCompound getNbtTagCompound(CPU65C02 mCPU) {
+	private static NBTTagCompound getNbtTagCompound(CPU65C02S mCPU) {
 		CPU65C02State cpuState = (CPU65C02State) mCPU.getCpuState();
 		NBTTagCompound cpuTag = new NBTTagCompound();
 		cpuTag.setInteger("rA", cpuState.a);

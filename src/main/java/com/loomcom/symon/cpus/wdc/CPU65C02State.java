@@ -1,4 +1,4 @@
-package com.loomcom.symon.cpus;
+package com.loomcom.symon.cpus.wdc;
 
 import com.loomcom.symon.CPUState;
 import com.loomcom.symon.util.Utils;

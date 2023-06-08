@@ -2,9 +2,9 @@ package net.berrycompany.bitcomputers;
 
 import com.loomcom.symon.Bus;
 import com.loomcom.symon.CPU;
-import com.loomcom.symon.cpus.CPU65CE02;
 import li.cil.oc.api.machine.Context;
 import net.berrycompany.bitcomputers.devices.*;
+import net.berrycompany.bitcomputers.devices.GeneralIO;
 
 import java.util.ArrayList;
 

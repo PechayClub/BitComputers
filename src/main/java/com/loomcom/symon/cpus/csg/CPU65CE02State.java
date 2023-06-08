@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.loomcom.symon.cpus;
+package com.loomcom.symon.cpus.csg;
 
 import com.loomcom.symon.CPUState;
 import com.loomcom.symon.util.Utils;

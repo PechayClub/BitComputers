@@ -1,4 +1,4 @@
-package com.loomcom.symon.cpus;
+package com.loomcom.symon.cpus.wdc;
 
 public interface InstructionTable65C02 {
 

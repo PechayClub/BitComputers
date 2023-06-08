@@ -22,26 +22,19 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package net.berrycompany.bitcomputers.architectures.csg;
+package net.berrycompany.bitcomputers.architectures.wdc;
 
+import com.loomcom.symon.Bus;
+import com.loomcom.symon.cpus.wdc.CPU65C02;
+import com.loomcom.symon.cpus.wdc.CPU65C02S;
 import li.cil.oc.api.machine.Context;
+import net.berrycompany.bitcomputers.BitComputersMachine;
+import net.berrycompany.bitcomputers.devices.*;
 
 import java.util.ArrayList;
 
-import com.loomcom.symon.Bus;
-import com.loomcom.symon.cpus.csg.CPU65CE02;
-
-import net.berrycompany.bitcomputers.BitComputersMachine;
-import net.berrycompany.bitcomputers.devices.BootROM;
-import net.berrycompany.bitcomputers.devices.ComponentSelector;
-import net.berrycompany.bitcomputers.devices.ComputerInfo;
-import net.berrycompany.bitcomputers.devices.CopyEngine;
-import net.berrycompany.bitcomputers.devices.RTC;
-import net.berrycompany.bitcomputers.devices.BankSelector;
-import net.berrycompany.bitcomputers.devices.GeneralIO;
-
 @SuppressWarnings("unused")
-public class BitComputersMachine65CE02 extends BitComputersMachine {
+public class BitComputersMachine65C02S extends BitComputersMachine {
 
 	// Constants used by the simulated system. These define the memory map.
 
@@ -69,7 +62,7 @@ public class BitComputersMachine65CE02 extends BitComputersMachine {
 
 	// The simulated peripherals
 	private final Bus bus;
-	private final CPU65CE02 cpu;
+	private final CPU65C02S cpu;
 	private final GeneralIO generalio;
 	private final ComponentSelector compsel;
 	private final BankSelector banksel;
@@ -82,10 +75,10 @@ public class BitComputersMachine65CE02 extends BitComputersMachine {
 	// The machine memory
 	private final ArrayList<Byte> mem = new ArrayList<>();
 
-	public BitComputersMachine65CE02(Context context) {
+	public BitComputersMachine65C02S(Context context) {
 		this.context = context;
 		this.bus = new Bus();
-		this.cpu = new CPU65CE02();
+		this.cpu = new CPU65C02S();
 		this.generalio = new GeneralIO(GIODEV_BASE);
 		this.compsel = new ComponentSelector(COMPMAP_BASE);
 		this.banksel = new BankSelector(BANKSEL_BASE);
@@ -109,7 +102,7 @@ public class BitComputersMachine65CE02 extends BitComputersMachine {
 		return bus;
 	}
 
-	public CPU65CE02 getCpu() {
+	public CPU65C02S getCpu() {
 		return cpu;
 	}
 
@@ -142,7 +135,7 @@ public class BitComputersMachine65CE02 extends BitComputersMachine {
 	}
 
 	public String getName() {
-		return "BitComputers 65CE02";
+		return "BitComputers 65C02";
 	}
 
 	public Context getContext() {

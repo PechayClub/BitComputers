@@ -15,8 +15,8 @@ import net.berrycompany.bitcomputers.util.ValueManager;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.commons.io.IOUtils;
 
-import com.loomcom.symon.cpus.CPU65CE02;
-import com.loomcom.symon.cpus.CPU65CE02State;
+import com.loomcom.symon.cpus.csg.CPU65CE02;
+import com.loomcom.symon.cpus.csg.CPU65CE02State;
 
 import li.cil.oc.Settings;
 import li.cil.oc.api.Driver;

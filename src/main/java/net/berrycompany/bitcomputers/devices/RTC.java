@@ -6,7 +6,6 @@ import java.util.TimeZone;
 
 import com.loomcom.symon.Bus;
 import com.loomcom.symon.CPU;
-import com.loomcom.symon.cpus.CPU65CE02;
 import com.loomcom.symon.devices.Device;
 import li.cil.oc.api.machine.Machine;
 import net.minecraft.nbt.NBTTagCompound;
