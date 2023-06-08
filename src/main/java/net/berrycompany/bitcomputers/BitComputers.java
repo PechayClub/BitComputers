@@ -56,9 +56,9 @@ public class BitComputers {
 			log.error("Please reconfigure OpenComputers or you will run into issues.");
 
 		// Register EEPROM
-		registerEEPROM("boot65c02.rom", "boot65c02.rom");
-		registerEEPROM("boot65c02s.rom", "boot65c02s.rom");
-		registerEEPROM("boot65ce02.rom", "boot65ce02.rom");
+		registerEEPROM("65C02 BIOS", "boot65c02.rom");
+		registerEEPROM("65C02S BIOS", "boot65c02s.rom");
+		registerEEPROM("65CE02 BIOS", "boot65ce02.rom");
 	}
 
 	private static void registerEEPROM(String eepromName, String fileName) {
