@@ -35,7 +35,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import scala.Option;
 
-@Architecture.Name("65CE02")
+@Architecture.Name("CSG 65CE02")
 public class BitComputersArchitecture implements Architecture {
 	private final Machine machine;
 
