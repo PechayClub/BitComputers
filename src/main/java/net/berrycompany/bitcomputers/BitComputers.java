@@ -5,6 +5,7 @@ import java.io.InputStream;
 
 import net.berrycompany.bitcomputers.architectures.wdc.BitComputersArchitecture65C02;
 import net.berrycompany.bitcomputers.architectures.csg.BitComputersArchitecture65CE02;
+import net.berrycompany.bitcomputers.architectures.wdc.BitComputersArchitecture65C02S;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -35,8 +36,9 @@ public class BitComputers {
 		config = new Configuration(event.getSuggestedConfigurationFile());
 
 		BitComputersConfig.loadConfig(config);
-		Machine.add(BitComputersArchitecture65CE02.class);
 		Machine.add(BitComputersArchitecture65C02.class);
+		Machine.add(BitComputersArchitecture65C02S.class);
+		Machine.add(BitComputersArchitecture65CE02.class);
 	}
 
 	@Mod.EventHandler
@@ -54,18 +56,24 @@ public class BitComputers {
 			log.error("Please reconfigure OpenComputers or you will run into issues.");
 
 		// Register EEPROM
-		InputStream bootRom = this.getClass().getResourceAsStream("/assets/" + MODID + "/roms/boot.rom");
+		registerEEPROM("boot65c02.rom", "boot65c02.rom");
+		registerEEPROM("boot65c02s.rom", "boot65c02s.rom");
+		registerEEPROM("boot65ce02.rom", "boot65ce02.rom");
+	}
+
+	private static void registerEEPROM(String eepromName, String fileName) {
+		InputStream bootRom = BitComputers.class.getResourceAsStream("/assets/" + MODID + "/roms/" + fileName);
 		if (bootRom != null) {
 			try {
 				byte[] code = IOUtils.toByteArray(bootRom);
-				Items.registerEEPROM("EEPROM (65C02 BIOS)", code, null, false);
+				Items.registerEEPROM("EEPROM (" + eepromName + ")", code, null, true);
 			} catch (IOException e) {
-				log.warn("Failed reading boot.rom, no custom EEPROMs available", e);
+				log.warn("Failed reading " + fileName + ", no custom EEPROMs available", e);
 			} finally {
 				IOUtils.closeQuietly(bootRom);
 			}
 		} else {
-			log.warn("boot.rom could not be located, no custom EEPROMs available");
+			log.warn(fileName + " could not be located, no custom EEPROMs available");
 		}
 	}
 }

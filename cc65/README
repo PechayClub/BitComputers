@@ -9,8 +9,14 @@ $ ca65 --cpu 65c02 main.s
 $ ld65 -C bitcomputers.cfg -m main.map main.o bitcomputers.lib
 ```
 
-Compiling the boot rom:
+Compiling the boot roms:
 ```
-ca65 --cpu 65c02 boot.s
-ld65 -o boot.rom -C bitcomputers-eeprom.cfg -m boot.map boot.o
+ca65 --cpu 65c02 boot65c02.s
+ld65 -o boot65c02.rom -C bitcomputers-eeprom.cfg -m boot65c02.map boot65c02.o
+
+ca65 --cpu 65c02 boot65c02s.s
+ld65 -o boot65c02s.rom -C bitcomputers-eeprom.cfg -m boot65c02s.map boot65c02s.o
+
+ca65 --cpu 4510 boot65ce02.s
+ld65 -o boot65ce02.rom -C bitcomputers-eeprom.cfg -m boot65ce02.map boot65ce02.o
 ```
