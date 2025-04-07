@@ -30,6 +30,8 @@ import com.loomcom.symon.util.Utils;
 import net.berrycompany.bitcomputers.BitComputers;
 import net.berrycompany.bitcomputers.BitComputersConfig;
 
+import java.util.Random;
+
 /**
  * This class provides a simulation of the WDC 65C02 CPU's state machine.
  * A simple interface allows this 65C02 to read and write to a simulated bus,
@@ -86,10 +88,10 @@ public class CPU65C02 extends CPU implements InstructionTable65C02 {
      * Reset the CPU to known initial values.
      */
     public void reset() {
-		/* TODO: In reality, the stack pointer could be anywhere
-		   on the stack after reset. This non-deterministic behavior might be
-		   worth while to simulate. */
-        state.sp = 0xff;
+        // In reality, the stack pointer could be anywhere on the
+        // stack after reset. This non-deterministic behavior is now simulated.
+        Random random = new Random();
+        state.sp = random.nextInt(0x100); // Random value between 0x00 and 0xFF
 
         // Set the PC to the address stored in the reset vector
         state.pc = Utils.address(bus.read(RST_VECTOR_L), bus.read(RST_VECTOR_H));

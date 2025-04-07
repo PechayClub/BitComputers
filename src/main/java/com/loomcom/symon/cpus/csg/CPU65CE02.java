@@ -31,6 +31,8 @@ import com.loomcom.symon.util.Utils;
 import net.berrycompany.bitcomputers.BitComputers;
 import net.berrycompany.bitcomputers.BitComputersConfig;
 
+import java.util.Random;
+
 /**
  * This class provides a simulation of the CSG 65CE02 CPU's state machine.
  * A simple interface allows this 65CE02 to read and write to a simulated bus,
@@ -80,10 +82,10 @@ public class CPU65CE02 extends CPU implements InstructionTable65CE02 {
 	 * Reset the CPU to known initial values.
 	 */
 	public void reset() {
-		/* TODO: In reality, the stack pointer could be anywhere
-		   on the stack after reset. This non-deterministic behavior might be
-		   worth while to simulate. */
-		state.sp = 0xffff;
+		// In reality, the stack pointer could be anywhere on the stack after reset.
+		// This non-deterministic behavior is now simulated.
+		Random random = new Random();
+		state.sp = 0x0100 + random.nextInt(0x0100); // Random value between 0x0100 and 0x01FF
 
 		// Set the PC to the address stored in the reset vector
 		state.pc = Utils.address(bus.read(RST_VECTOR_L), bus.read(RST_VECTOR_H));
@@ -123,15 +125,7 @@ public class CPU65CE02 extends CPU implements InstructionTable65CE02 {
 		}
 	}
 
-	public int getCycles() {
-		return cycles;
-	}
-
-	public void addCycles(int count) {
-		cycles += count;
-	}
-
-	/**
+    /**
 	 * Performs an individual instruction cycle.
 	 */
 	@SuppressWarnings("DuplicateBranchesInSwitch")

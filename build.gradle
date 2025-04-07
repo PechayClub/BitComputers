@@ -1,3 +1,4 @@
+//file:noinspection VulnerableLibrariesLocal
 buildscript {
     repositories {
         maven {url = "https://maven.minecraftforge.net"}
@@ -59,7 +60,7 @@ jar {
                 "Specification-Vendor": "gamax92",
                 "Specification-Version": project.version,
                 "Implementation-Title": project.name,
-                "Implementation-Version": "${version}",
+                "Implementation-Version": "${archiveVersion}",
                 "Implementation-Vendor" :"James Coonradt",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
